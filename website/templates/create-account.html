@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear cuenta{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        #principal{
+            width: 100vw;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #formulario_login{
+            width: 400px
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <main id="principal">
+        <section id="formulario_login">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="text-center fw-bold mb-4">Crear cuenta</h1>
+
+                        {% if create_account_error != None %}
+                            <div class="alert alert-danger mb-3" role="alert">{{ create_account_error }}</div>
+                        {% endif %}
+
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="{% url 'crear-usuario' %}" method="post">
+                                    {% csrf_token %}
+    
+                                    <div class="mb-3">
+                                        <label for="codigo" class="form-label fw-bold">Codigo</label>
+                                        <input type="text" class="form-control" name="codigo" id="email_input" placeholder="Ingresa tu codigo de estudiante">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                                        <input type="text" class="form-control" name="nombre" id="email_input" placeholder="Ingresa tu nombre">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="apellido" class="form-label fw-bold">Apellido</label>
+                                        <input type="text" class="form-control" name="apellido" id="email_input" placeholder="Ingresa tu apellido">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label fw-bold">Contraseña</label>
+                                        <input type="password" class="form-control" name="password" id="password_input" placeholder="Ingresa tu contraseña" />
+                                    </div>
+    
+                                    <p class="text-center">
+                                        <a href="{% url 'iniciar-sesion' %}">¿Ya tienes cuenta?</a>
+                                    </p>
+
+                                    <div>
+                                        <button class="btn btn-primary w-100">Crear cuenta</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
